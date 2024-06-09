@@ -1,0 +1,62 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Federation {
+  contactInformation String?
+  country            String?
+  createdAt          DateTime @default(now())
+  description        String?
+  id                 String   @id @default(cuid())
+  logo               Json?
+  name               String?
+  updatedAt          DateTime @updatedAt
+}
+
+model Member {
+  contactNumber String?
+  createdAt     DateTime             @default(now())
+  dateOfBirth   DateTime?
+  email         String?
+  firstName     String?
+  id            String               @id @default(cuid())
+  kycStatus     EnumMemberKycStatus?
+  lastName      String?
+  updatedAt     DateTime             @updatedAt
+}
+
+model Club {
+  createdAt   DateTime @default(now())
+  description String?
+  id          String   @id @default(cuid())
+  logo        Json?
+  name        String?
+  updatedAt   DateTime @updatedAt
+}
+
+model Event {
+  createdAt   DateTime  @default(now())
+  description String?
+  endDate     DateTime?
+  id          String    @id @default(cuid())
+  startDate   DateTime?
+  title       String?
+  updatedAt   DateTime  @updatedAt
+}
+
+model Game {
+  createdAt   DateTime @default(now())
+  description String?
+  id          String   @id @default(cuid())
+  title       String?
+  updatedAt   DateTime @updatedAt
+}
+
+enum EnumMemberKycStatus {
+  Option1
+}
